@@ -15,4 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file apps/api/v2/Dockerfile --tag calcom-api:$(date +%s)
+      run: docker build . --file apps/api/v2/Dockerfile --tag calcom-api:$(date +%s)-el-memer
+    - name: Login to ghcr
+      run: echo $CR_PAT |  docker login ghcr.io -u el-memer --password-stdin
+    - name: Push to ghcr
+      run: docker push calcom-api:$(date +%s)-el-memer
+      
